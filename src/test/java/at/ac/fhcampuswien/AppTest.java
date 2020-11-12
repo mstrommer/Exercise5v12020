@@ -254,7 +254,7 @@ class AppTest {
             // check if all fields are named correctly, private,...
             assertTrue(Arrays.stream(PersonManager.class.getDeclaredFields()).allMatch(
                     field -> Modifier.toString(field.getModifiers()).equals("private") &&
-                            field.getName().equals("persons") && field.getType().toString().equals(Person.class.arrayType().toString())
+                            field.getName().equals("persons") && field.getType().toString().equals(Person[].class.toString())
             ), "Please check your field names, types and modifiers!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -280,7 +280,7 @@ class AppTest {
     public void classPersonManager3() {
         try {
             Method m = PersonManager.class.getMethod("getPersons");
-            Constructor<?> co = PersonManager.class.getConstructor(Person.class.arrayType());
+            Constructor<?> co = PersonManager.class.getConstructor(Person[].class);
             Constructor<?> co2 = Person.class.getConstructor(String.class, String.class, String.class, int.class, String.class);
             Person p1 = (Person) co2.newInstance("Justin", "Timberlake", "+4367636723", 0, "Justin Timberlake");
             Person p2 = (Person) co2.newInstance("Justin", "Timberlake", "+4367636723", 0, "I m a Jerk but listen");
@@ -302,7 +302,7 @@ class AppTest {
         try {
             Method m1 = PersonManager.class.getMethod("printPersonsWithSameName", String.class);
             Method m2 = Person.class.getMethod("getName");
-            Constructor<?> co = PersonManager.class.getConstructor(Person.class.arrayType());
+            Constructor<?> co = PersonManager.class.getConstructor(Person[].class);
             Constructor<?> co2 = Person.class.getConstructor(String.class, String.class, String.class, int.class, String.class);
             Person p1 = (Person) co2.newInstance("P", "1", "", 0, "");
             Person p2 = (Person) co2.newInstance("P", "2", "", 0, "");
